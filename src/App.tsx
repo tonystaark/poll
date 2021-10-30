@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import Home from './pages/Home';
+import Questions from './pages/Questions';
+import QuestionDetails from './pages/QuestionDetails';
+import NewQuestion from './pages/NewQuestion';
+
+import PageNotFound from './pages/PageNotFound';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="main-layout">
+        <Switch>
+          <Route path='/' exact>
+            <Home/>
+          </Route>
+          <Route path='/question' exact>
+            <NewQuestion/>
+          </Route>
+          <Route path='/questions' exact>
+            <Questions/>
+          </Route>
+          <Route path="/questions/:id">
+            <QuestionDetails/>
+          </Route>
+          <Route component={PageNotFound} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

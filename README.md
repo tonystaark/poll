@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The api used for testing is from http://docs.pollsapi.apiary.io/
+
 ## Available Scripts
 
 In the project directory, you can run:
