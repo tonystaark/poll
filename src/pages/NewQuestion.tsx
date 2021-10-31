@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import CustomPageHeader from "../components/CustomPageHeader";
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { postNewQuestions } from '../apis/api';
 
@@ -15,6 +15,7 @@ const formItemLayout = {
     sm: { span: 20 },
   },
 };
+
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -22,18 +23,17 @@ const formItemLayoutWithOutLabel = {
   },
 };
 
-
-
 const Questions = () => {
   const history = useHistory();
   const [form] = Form.useForm();
-  const onFinish = (values:any) => {
-    console.log('Received values of form:', values);
+  const onFinish = () => {
+    message.success('Your poll question has been posted');
   };
 
   const submitForm = async() => {
     await postNewQuestions(form.getFieldsValue());
   }
+
 
   const clearForm = () => {
     form.resetFields()
@@ -52,7 +52,7 @@ const Questions = () => {
             label="Question"
             rules={[
               { required: true },
-              { type: 'string', min: 20 },
+              { type: 'string', min: 10 },
             ]}
           >
             <Input placeholder="Please type the question here" />
@@ -116,10 +116,10 @@ const Questions = () => {
           )}
         </Form.List>
         <Form.Item className='button-row'>
-          <Button type="primary" onClick={submitForm}>
+          <Button type="primary" onClick={submitForm} htmlType="submit">
             Submit
           </Button>
-          <Button type="primary" onClick={clearForm}>
+          <Button type="primary" onClick={clearForm} htmlType="reset">
             Clear
           </Button>
         </Form.Item>
